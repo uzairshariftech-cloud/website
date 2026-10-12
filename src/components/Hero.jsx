@@ -50,10 +50,10 @@ export default function Hero({ openQuoteModal, navigateToProducts }) {
     },
     {
       id: 'inspection',
-      title: 'AQL 2.5 Quality Control & Dimensional Check',
+      title: 'Quality & In-House Testing Lab',
       hub: 'Export Quality Audit Desk, Pakistan',
       tag: '04 Standards Verification',
-      desc: 'Color fastness, pull test on hardware, measurement audits, and needle detection sweep.',
+      desc: 'GSM test, color fastness test, shrinkage test, and measurements & stitching checks.',
       imageUrl: '/images/hero/hero-inspection.jpg',
       fallbackUrl: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=2000&auto=format&fit=crop'
     },

@@ -67,20 +67,23 @@ export default function GlobalExportNetwork({ openQuoteModal }) {
       id: 'quality',
       label: 'Quality & Testing Lab',
       icon: ShieldCheck,
-      badge: 'AQL 2.5 Strict Standard',
-      title: 'Comprehensive Quality Assurance & Lab Verification',
-      tagline: 'Rigorous multi-stage physical and dimensional checks throughout production.',
-      desc: 'We enforce strict buyer technical specifications from raw yarn spinning and knitting/weaving to finished garment pressing and boxing, safeguarding your brand reputation in retail markets.',
+      badge: 'Core Quality Testing',
+      title: 'Quality & Testing Lab',
+      tagline: 'Standard quality verification tests for export-grade garments.',
+      desc: 'To ensure top-grade quality and buyer satisfaction, we conduct 4 essential quality tests on every production order:',
+      pointsTitle: 'Core Testing Checklist',
+      metricsTitle: 'Standard Quality Tests',
       stats: [
-        { label: 'Inspection Protocol', value: 'AQL 2.5 General Level II' },
-        { label: 'Color Fastness', value: 'ISO 105 / AATCC 61' },
-        { label: 'Dimensional Stability', value: 'Under 3% Residual Shrinkage' },
-        { label: 'Safety Sweep', value: '100% Calibrated Needle Detection' }
+        { label: '1. Fabric Weight', value: 'GSM Test' },
+        { label: '2. Color Fastness', value: 'Color Fastness Test' },
+        { label: '3. Fabric Stability', value: 'Shrinkage Test' },
+        { label: '4. Fit & Construction', value: 'Measurements & Stitching Check' }
       ],
       points: [
-        'Measurement tolerance audit across every graded size according to buyer technical specification sheet.',
-        'Seam strength, tensile tear resistance, and snap/zipper pull torque validation.',
-        'Pantone TCX and TPX digital spectrophotometer matching under standardized D65 retail lighting.'
+        'GSM test - Verifies fabric weight and density to meet required buyer specifications.',
+        'Color fastness test - Checks washing, rubbing, and light resistance to ensure colors do not fade or bleed.',
+        'Shrinkage test - Wash and dry cycle testing to ensure garments keep their original shape and size.',
+        'Measurements and stitching check - Complete sizing tolerance verification and durable seam inspection.'
       ]
     },
     {
@@ -291,7 +294,7 @@ export default function GlobalExportNetwork({ openQuoteModal }) {
               </p>
 
               <div style={{ fontSize: '0.82rem', fontWeight: '800', color: '#800020', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1rem' }}>
-                Operational Execution Standards
+                {currentPillar.pointsTitle || 'Operational Execution Standards'}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                 {currentPillar.points.map((pt, idx) => (
@@ -328,7 +331,7 @@ export default function GlobalExportNetwork({ openQuoteModal }) {
                   gap: '0.5rem'
                 }}>
                   <Layers size={15} color="#800020" />
-                  <span>Technical Coordination Metrics</span>
+                  <span>{currentPillar.metricsTitle || 'Technical Coordination Metrics'}</span>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>

@@ -24,8 +24,6 @@ import { PRODUCTS_CATEGORIES, COMPANY_DETAILS } from '../data/productsData';
 import BrandLogo from './BrandLogo';
 
 export default function QuoteModal({ isOpen, onClose, preselectedCategory = '' }) {
-  if (!isOpen) return null;
-
   const [formData, setFormData] = useState({
     // Contact Information
     fullName: '',
@@ -56,6 +54,8 @@ export default function QuoteModal({ isOpen, onClose, preselectedCategory = '' }
   const [submitting, setSubmitting] = useState(false);
   const [submittedTicket, setSubmittedTicket] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
+
+  if (!isOpen) return null;
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -131,7 +131,6 @@ export default function QuoteModal({ isOpen, onClose, preselectedCategory = '' }
     }} className="fade-in">
       
       <div className="quote-modal-dialog" style={{
-        backgroundColor: '#ffffff',
         borderRadius: '24px',
         maxWidth: '920px',
         width: '100%',
