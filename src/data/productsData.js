@@ -264,7 +264,30 @@ export const COMPANY_DETAILS = {
   emailInfo: 'info@uzairsharifenterprises.com',
   email: 'info@uzairsharifenterprises.com',
   domain: 'uzairsharifenterprises.com',
+  gmailUrl: 'https://mail.google.com/mail/?view=cm&fs=1&to=info@uzairsharifenterprises.com',
   whatsappRaw: '03281672473',
   whatsappIntl: '+923281672473',
   whatsappUrl: 'https://wa.me/923281672473?text=Hello%20Uzair%20Sharif%20Enterprises%2C%20I%20am%20an%20international%20buyer%20interested%20in%20custom%20garment%20production%20and%20quotation.'
+};
+
+export const isMobileDevice = () => {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+export const getEmailHref = (email = COMPANY_DETAILS.emailInfo, subject = '', body = '') => {
+  if (!isMobileDevice()) {
+    let url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+    if (subject) url += `&su=${encodeURIComponent(subject)}`;
+    if (body) url += `&body=${encodeURIComponent(body)}`;
+    return url;
+  }
+  let mailto = `mailto:${email}`;
+  const params = [];
+  if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
+  if (body) params.push(`body=${encodeURIComponent(body)}`);
+  if (params.length > 0) {
+    mailto += `?${params.join('&')}`;
+  }
+  return mailto;
 };

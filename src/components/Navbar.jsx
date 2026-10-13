@@ -13,12 +13,14 @@ import {
   Sparkles,
   ArrowRight
 } from 'lucide-react';
-import { COMPANY_DETAILS } from '../data/productsData';
+import { COMPANY_DETAILS, getEmailHref, isMobileDevice } from '../data/productsData';
 import BrandLogo from './BrandLogo';
 
 export default function Navbar({ activePage, setActivePage, openQuoteModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const isMobile = isMobileDevice();
+  const emailHref = getEmailHref(COMPANY_DETAILS.emailInfo);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +92,9 @@ export default function Navbar({ activePage, setActivePage, openQuoteModal }) {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
             <a 
-              href={`mailto:${COMPANY_DETAILS.emailInfo}`}
+              href={emailHref}
+              target={isMobile ? undefined : "_blank"}
+              rel={isMobile ? undefined : "noopener noreferrer"}
               style={{ 
                 color: '#FAF7F5', 
                 textDecoration: 'none', 
@@ -110,7 +114,7 @@ export default function Navbar({ activePage, setActivePage, openQuoteModal }) {
                 e.currentTarget.style.color = '#FAF7F5';
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
-              title="Click to open your email client"
+              title={isMobile ? "Email us" : "Open in Gmail (new tab)"}
             >
               <Mail size={13} color="#F0CBD3" />
               <span style={{ textDecoration: 'underline', textUnderlineOffset: '2px' }}>{COMPANY_DETAILS.emailInfo}</span>
@@ -277,8 +281,11 @@ export default function Navbar({ activePage, setActivePage, openQuoteModal }) {
             </li>
             <li style={{ paddingTop: '0.75rem', borderTop: '1px solid #EAE1DD', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <a
-                href={`mailto:${COMPANY_DETAILS.emailInfo}`}
+                href={emailHref}
+                target={isMobile ? undefined : "_blank"}
+                rel={isMobile ? undefined : "noopener noreferrer"}
                 onClick={() => setMobileMenuOpen(false)}
+                title={isMobile ? "Email us" : "Open in Gmail (new tab)"}
                 style={{
                   display: 'flex',
                   alignItems: 'center',

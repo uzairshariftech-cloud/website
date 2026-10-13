@@ -9,10 +9,12 @@ import {
   ArrowRight,
   FileText
 } from 'lucide-react';
-import { COMPANY_DETAILS, PRODUCTS_CATEGORIES } from '../data/productsData';
+import { COMPANY_DETAILS, PRODUCTS_CATEGORIES, getEmailHref, isMobileDevice } from '../data/productsData';
 import BrandLogo from './BrandLogo';
 
 export default function Footer({ setActivePage, openQuoteModal }) {
+  const isMobile = isMobileDevice();
+  const emailHref = getEmailHref(COMPANY_DETAILS.emailInfo);
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About Us' },
@@ -132,7 +134,9 @@ export default function Footer({ setActivePage, openQuoteModal }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.84rem' }}>
               <div>
                 <a 
-                  href={`mailto:${COMPANY_DETAILS.emailInfo}`} 
+                  href={emailHref}
+                  target={isMobile ? undefined : "_blank"}
+                  rel={isMobile ? undefined : "noopener noreferrer"}
                   style={{ 
                     display: 'flex', 
                     alignItems: 'center', 
@@ -152,7 +156,7 @@ export default function Footer({ setActivePage, openQuoteModal }) {
                     e.currentTarget.style.color = '#ffffff';
                     e.currentTarget.style.textDecoration = 'none';
                   }}
-                  title="Click to open your email client"
+                  title={isMobile ? "Email us" : "Open in Gmail (new tab)"}
                 >
                   <Mail size={16} color="#E8A8B8" style={{ flexShrink: 0 }} />
                   <span>{COMPANY_DETAILS.emailInfo}</span>

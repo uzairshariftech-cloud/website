@@ -10,9 +10,11 @@ import {
   Building2,
   FileText
 } from 'lucide-react';
-import { COMPANY_DETAILS, PRODUCTS_CATEGORIES } from '../data/productsData';
+import { COMPANY_DETAILS, PRODUCTS_CATEGORIES, getEmailHref, isMobileDevice } from '../data/productsData';
 
 export default function ContactSection({ openQuoteModal }) {
+  const isMobile = isMobileDevice();
+  const emailHref = getEmailHref(COMPANY_DETAILS.emailInfo);
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -116,7 +118,9 @@ export default function ContactSection({ openQuoteModal }) {
               
               {/* Email Card */}
               <a 
-                href={`mailto:${COMPANY_DETAILS.emailInfo}`}
+                href={emailHref}
+                target={isMobile ? undefined : "_blank"}
+                rel={isMobile ? undefined : "noopener noreferrer"}
                 className="subtle-card" 
                 style={{ 
                   padding: '1.25rem 1.5rem', 
@@ -125,8 +129,8 @@ export default function ContactSection({ openQuoteModal }) {
                   gap: '1.25rem', 
                   backgroundColor: '#FFFFFF', 
                   borderColor: '#EAE1DD',
-                  textDecoration: 'none',
-                  borderRadius: '12px',
+                  textDecoration: 'none', 
+                  borderRadius: '12px', 
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
@@ -141,7 +145,7 @@ export default function ContactSection({ openQuoteModal }) {
                   e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.02)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
-                title="Click to open your email app and send an inquiry"
+                title={isMobile ? "Email us" : "Open in Gmail (new tab)"}
               >
                 <div style={{ 
                   width: '46px', 
@@ -169,7 +173,7 @@ export default function ContactSection({ openQuoteModal }) {
                     {COMPANY_DETAILS.emailInfo}
                   </div>
                   <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
-                    Opens your email client directly
+                    {isMobile ? 'Opens your email app directly' : 'Opens in Gmail in a new tab'}
                   </span>
                 </div>
               </a>
